@@ -7,18 +7,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Use Node.js 24 to avoid future deprecation warnings
       - uses: actions/setup-node@v4
         with:
           node-version: 24
 
+      - run: npm install -g eas-cli
       - run: npm install
 
-      # Prepare the project for Android build
-      - run: npx expo prebuild --platform android --no-install
+      - run: eas login --token ${{ secrets.EXPO_TOKEN }}
 
-      # Build using Gradle
-      - uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 34
-          script: ./gradlew assembleDebug
+      - run: eas build --platform android --profile preview --non-interactive

@@ -9,6 +9,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm install -g eas-cli
       - run: npm install
-      - run: npx expo export
+      - run: npx expo prebuild --platform android --no-install
+      - uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          script: ./gradlew assembleDebug

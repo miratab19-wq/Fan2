@@ -1,0 +1,9 @@
+{
+  "expo": {
+    "name": "Fantasia Free",
+    "slug": "fantasia-free",
+    "android": {
+      "package": "com.fantasia.free"
+    }
+  }
+}
